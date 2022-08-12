@@ -12,6 +12,10 @@ import java.util.List;
 @Setter
 public class Doctor {
     @Id
+    @SequenceGenerator(name = "doctors_seq", sequenceName =
+            "doctors_id_seq", allocationSize = 1)
+    @GeneratedValue(generator = "doctors_seq", strategy =
+            GenerationType.SEQUENCE)
     private int id;
     @Column(name = "doctor_name")
     private String name;

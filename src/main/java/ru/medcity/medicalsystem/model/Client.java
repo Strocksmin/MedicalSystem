@@ -11,6 +11,10 @@ import javax.persistence.*;
 @Setter
 public class Client {
     @Id
+    @SequenceGenerator(name = "clients_seq", sequenceName =
+            "clients_id_seq", allocationSize = 1)
+    @GeneratedValue(generator = "clients_seq", strategy =
+            GenerationType.SEQUENCE)
     private int id;
     @Column(name = "client_name")
     private String name;

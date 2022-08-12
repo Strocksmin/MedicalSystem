@@ -4,10 +4,13 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
+import ru.medcity.medicalsystem.model.Proposal;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
+import javax.transaction.Transactional;
 import java.util.List;
+
 
 @Service
 public class ProposalService {
@@ -26,5 +29,15 @@ public class ProposalService {
     @PreDestroy
     public void unSession() {
         session.close();
+    }
+
+    public void addProposal(Proposal proposal) {
+        session.beginTransaction();
+        session.saveOrUpdate(proposal);
+        session.getTransaction().commit();
+    }
+
+    public List<Proposal> getProposals() {
+        return session.createQuery("select p from Proposal p", Proposal.class).getResultList();
     }
 }

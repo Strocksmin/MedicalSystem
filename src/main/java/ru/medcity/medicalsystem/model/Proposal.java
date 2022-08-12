@@ -12,6 +12,10 @@ import java.io.Serializable;
 @Table(name = "proposals")
 public class Proposal implements Serializable {
     @Id
+    @SequenceGenerator(name = "proposals_seq", sequenceName =
+            "proposals_id_seq", allocationSize = 1)
+    @GeneratedValue(generator = "proposals_seq", strategy =
+            GenerationType.SEQUENCE)
     private int id;
     @Column(name = "proposal_name")
     private String name;
