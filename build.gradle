@@ -1,0 +1,39 @@
+plugins {
+    id 'org.springframework.boot' version '2.7.2'
+    id 'io.spring.dependency-management' version '1.0.12.RELEASE'
+    id 'java'
+}
+
+group = 'ru.medcity'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '18'
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.hibernate:hibernate-core:5.4.28.Final'
+    implementation 'org.postgresql:postgresql:42.2.18'
+    implementation 'com.zaxxer:HikariCP:4.0.2'
+    implementation 'org.springframework:spring-orm:5.1.6.RELEASE'
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation group: 'org.springframework', name: 'spring-web', version: '5.3.19'
+    implementation 'org.springframework.boot:spring-boot-starter'
+    implementation 'org.projectlombok:lombok:1.18.22'
+    annotationProcessor 'org.projectlombok:lombok:1.18.22'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
