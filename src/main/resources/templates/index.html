@@ -21,7 +21,7 @@
 
 <body style="/*background: url(&quot;design.jpg&quot;);*/background-position: 0 -60px;">
     <nav class="navbar navbar-light navbar-expand-md fixed-top navbar-shrink py-3" id="mainNav">
-        <div class="container"><a class="navbar-brand d-flex align-items-center" href="/"><span class="bs-icon-sm bs-icon-circle bs-icon-primary shadow d-flex justify-content-center align-items-center me-2 bs-icon"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-suit-heart">
+        <div class="container"><a class="navbar-brand d-flex align-items-center" href="index"><span class="bs-icon-sm bs-icon-circle bs-icon-primary shadow d-flex justify-content-center align-items-center me-2 bs-icon"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-suit-heart">
                         <path d="m8 6.236-.894-1.789c-.222-.443-.607-1.08-1.152-1.595C5.418 2.345 4.776 2 4 2 2.324 2 1 3.326 1 4.92c0 1.211.554 2.066 1.868 3.37.337.334.721.695 1.146 1.093C5.122 10.423 6.5 11.717 8 13.447c1.5-1.73 2.878-3.024 3.986-4.064.425-.398.81-.76 1.146-1.093C14.446 6.986 15 6.131 15 4.92 15 3.326 13.676 2 12 2c-.777 0-1.418.345-1.954.852-.545.515-.93 1.152-1.152 1.595L8 6.236zm.392 8.292a.513.513 0 0 1-.784 0c-1.601-1.902-3.05-3.262-4.243-4.381C1.3 8.208 0 6.989 0 4.92 0 2.755 1.79 1 4 1c1.6 0 2.719 1.05 3.404 2.008.26.365.458.716.596.992a7.55 7.55 0 0 1 .596-.992C9.281 2.049 10.4 1 12 1c2.21 0 4 1.755 4 3.92 0 2.069-1.3 3.288-3.365 5.227-1.193 1.12-2.642 2.48-4.243 4.38z"></path>
                     </svg></span><span>Медсити</span></a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navcol-1">
@@ -171,11 +171,19 @@
             <div class="row d-flex justify-content-center">
                 <div class="col-md-6 col-xl-4">
                     <div>
-                        <form class="p-3 p-xl-4" method="post">
-                            <div class="mb-3"><input class="form-control" type="text" id="name-1" name="name" placeholder="Ваше имя"></div>
-                            <div class="mb-3"></div>
-                            <div class="mb-3"><textarea class="form-control" id="message-1" name="message" rows="8" placeholder="Текст сообщения"></textarea></div>
-                            <div><button class="btn btn-primary shadow d-block w-100" type="submit">Отправить</button></div>
+                        <form class="p-3 p-xl-4" th:action="@{sendMessage}" th:object="${messageData}" method="post">
+                            <div class="mb-3">
+                                <input class="form-control" type="text" th:field="*{name}" id="name-1" name="name" placeholder="Ваше имя">
+                            </div>
+                            <div class="mb-3">
+                                <input class="form-control" type="text" th:field="*{phone}" name="phone" placeholder="Номер телефона">
+                            </div>
+                            <div class="mb-3">
+                                <textarea class="form-control" id="message-1" th:field="*{text}" name="message" rows="6" placeholder="Текст сообщения"></textarea>
+                            </div>
+                            <div>
+                                <button class="btn btn-primary shadow d-block w-100" type="submit">Отправить</button>
+                            </div>
                         </form>
                     </div>
                 </div>
@@ -187,7 +195,7 @@
                                 </svg></div>
                             <div class="px-2">
                                 <h6 class="fw-bold mb-0">Телефон</h6>
-                                <p class="text-muted mb-0">+79614421706</p>
+                                <p class="text-muted mb-0">88005553535</p>
                             </div>
                         </div>
                         <div class="d-flex align-items-center p-3">
@@ -196,7 +204,7 @@
                                 </svg></div>
                             <div class="px-2">
                                 <h6 class="fw-bold mb-0">Электронная почта</h6>
-                                <p class="text-muted mb-0">aekarabanov@yandex.ru</p>
+                                <p class="text-muted mb-0">medcityapp@mail.ru</p>
                             </div>
                         </div>
                         <div class="d-flex align-items-center p-3">
