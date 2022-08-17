@@ -56,8 +56,7 @@
                                 </div>
                                 <select class="form-select" th:field="*{specialization}" style="margin-top: 1em;margin-bottom: 1em;">
                                     <optgroup label="Врачи">
-                                        <option value="12" selected="">Хирург</option>
-                                        <option value="13">Косметолог</option>
+                                        <option th:each="doctor : ${doctors}" th:value="${doctor.getSpecialization()}" th:text="${doctor.getSpecialization()}" selected=""></option>
                                     </optgroup>
                                 </select>
                                 <input class="form-control" type="datetime-local" th:field="*{datetime}" style="margin-bottom: 1em; background-color: white;" required="" placeholder="Выберите дату">

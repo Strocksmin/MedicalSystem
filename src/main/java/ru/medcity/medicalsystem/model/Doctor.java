@@ -1,5 +1,6 @@
 package ru.medcity.medicalsystem.model;
 
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -8,8 +9,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "doctors")
-@Getter
-@Setter
+@Data
 public class Doctor {
     @Id
     @SequenceGenerator(name = "doctors_seq", sequenceName =
@@ -25,6 +25,8 @@ public class Doctor {
     private String email;
     @Column(name = "doctor_number")
     private String number;
+    @Column(name = "doctor_specialization")
+    private String specialization;
 
     @OneToMany(mappedBy = "doctor")
     private List<Client> clients;
