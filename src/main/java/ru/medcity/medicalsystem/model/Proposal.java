@@ -16,6 +16,7 @@ public class Proposal implements Serializable {
             "proposals_id_seq", allocationSize = 1)
     @GeneratedValue(generator = "proposals_seq", strategy =
             GenerationType.SEQUENCE)
+    @Column(name = "id")
     private int id;
     @Column(name = "proposal_name")
     private String name;

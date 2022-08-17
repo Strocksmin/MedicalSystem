@@ -1,5 +1,6 @@
 package ru.medcity.medicalsystem.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -15,6 +16,7 @@ public class Client {
             "clients_id_seq", allocationSize = 1)
     @GeneratedValue(generator = "clients_seq", strategy =
             GenerationType.SEQUENCE)
+    @Column(name = "id")
     private int id;
     @Column(name = "client_name")
     private String name;
@@ -24,13 +26,42 @@ public class Client {
     private String email;
     @Column(name = "client_number")
     private String number;
-    @Column(name = "medic_id")
-    private int medicID;
+    @Column(name = "doctor_id")
+    private int doctorID;
     @Column(name = "client_datetime")
     private String datetime;
 
-    @ManyToOne
+    @JsonIgnore
+    @ManyToOne(optional=false)
+    @JoinColumn(name = "doctor_id", insertable=false, updatable=false)
     private Doctor doctor;
+
+    public Client(String name, String lastname, String email, String number, int doctorID, String datetime) {
+        this.name = name;
+        this.lastname = lastname;
+        this.email = email;
+        this.number = number;
+        this.doctorID = doctorID;
+        this.datetime = datetime;
+    }
+
+    @Override
+    public String toString() {
+        return "Client{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", lastname='" + lastname + '\'' +
+                ", email='" + email + '\'' +
+                ", number='" + number + '\'' +
+                ", doctorID=" + doctorID +
+                ", datetime='" + datetime + '\'' +
+                ", doctor=" + doctor +
+                '}';
+    }
+
+    public Client() {
+
+    }
 
     public Doctor getDoctor() {
         return doctor;

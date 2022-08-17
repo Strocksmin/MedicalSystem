@@ -5,7 +5,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.medcity.medicalsystem.DTO.MessageData;
+import ru.medcity.medicalsystem.model.Client;
 import ru.medcity.medicalsystem.model.Proposal;
+import ru.medcity.medicalsystem.service.ClientService;
 import ru.medcity.medicalsystem.service.DoctorService;
 import ru.medcity.medicalsystem.service.ProposalService;
 
@@ -14,6 +16,8 @@ public class AdminPanelController {
     @Autowired
     ProposalService proposalService;
 
+    @Autowired
+    ClientService clientService;
     @Autowired
     DoctorService doctorService;
 
@@ -52,6 +56,13 @@ public class AdminPanelController {
 
     @GetMapping("adminpanel/accept/{id}")
     public String acceptProposal(Model model, @PathVariable int id) {
+        Proposal proposal = proposalService.getProposal(id);
+        clientService.addClient(new Client(proposal.getName(), proposal.getLastname(),
+                proposal.getEmail(), proposal.getNumber(),
+                doctorService.getDoctorForProposal(proposal.getSpecialization()).getId(),
+                proposal.getDatetime()));
+        proposalService.deleteProposal(id);
         return "redirect:/adminpanel";
     }
+
 }
