@@ -31,7 +31,7 @@ public class AppointmentController {
     @PostMapping("appointment")
     public String postAppointment(final Proposal appointmentData, final Model model) {
         proposalService.addProposal(appointmentData);
-        return "appointment";
+        return "redirect:appointment";
     }
 
     @GetMapping("appointment/proposals")

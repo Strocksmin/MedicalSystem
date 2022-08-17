@@ -106,13 +106,19 @@
 		<td th:text="${proposal.getDatetime()}"></td>
 		<td th:text="${proposal.getSpecialization()}"></td>
 		<td class="text-center">
-			<button class="btn btn-info" type="button" style="width: 5.5em;height: 3em;font-size: 1.3rem; padding: 0;">Изменить</button>
+			<a th:href="@{adminpanel/edit/{id} (id = ${proposal.getId()})}">
+                <button class="btn btn-info" type="button" style="width: 5.5em;height: 3em;font-size: 1.3rem; padding: 0;">Изменить</button>
+            </a>
 		</td>
 		<td class="text-center">
-			<button class="btn btn-success" type="button" style="width: 5.5em;height: 3em;font-size: 1.3rem; padding: 0;">Принять</button>
+            <a th:href="@{adminpanel/accept/{id} (id = ${proposal.getId()})}">
+                <button class="btn btn-success" type="button" style="width: 5.5em;height: 3em;font-size: 1.3rem; padding: 0;">Принять</button>
+            </a>
 		</td>
 		<td class="text-center">
-			<button class="btn btn-danger"  type="button" style="width: 5.5em;height: 3em;font-size: 1.3rem; padding: 0;">Отказ</button>
+            <a th:href="@{adminpanel/delete/{id} (id = ${proposal.getId()})}">
+                <button class="btn btn-danger"  type="button" style="width: 5.5em;height: 3em;font-size: 1.3rem; padding: 0;">Отказ</button>
+            </a>
 		</td>
 	</tr>
     <tbody>

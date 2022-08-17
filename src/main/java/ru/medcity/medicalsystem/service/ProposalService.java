@@ -41,4 +41,15 @@ public class ProposalService {
     public List<Proposal> getProposals() {
         return session.createQuery("select p from Proposal p", Proposal.class).getResultList();
     }
+
+    public Proposal getProposal(int id) {
+        return session.createQuery("select p from Proposal p where p.id ='" + id + "'", Proposal.class).getSingleResult();
+    }
+
+    public void deleteProposal(int id) {
+        session.beginTransaction();
+        Proposal proposal = session.load(Proposal.class, id);
+        session.delete(proposal);
+        session.getTransaction().commit();
+    }
 }
