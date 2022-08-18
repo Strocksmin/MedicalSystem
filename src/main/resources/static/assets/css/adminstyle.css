@@ -336,7 +336,7 @@ h3 {
   left: 0;
   top: 50%;
   margin-top: -18px;
-  background-color: #5f9cfd;
+  /*background-color: #5f9cfd; */
   opacity: 0;
   -webkit-transition: all 0.5s ease-in-out;
   -moz-transition: all 0.5s ease-in-out;
@@ -347,10 +347,10 @@ h3 {
 .c-menu > ul .c-menu__item.is-active {
   color: #fff;
 }
-.c-menu > ul .c-menu__item.is-active .c-menu__item__inner {
+/*.c-menu > ul .c-menu__item.is-active .c-menu__item__inner {
   border-left-color: #fff;
   background-color: #1e3e6f;
-}
+} */
 .c-menu > ul .c-menu__item.is-active .c-menu__item__inner svg {
   color: #fff;
 }

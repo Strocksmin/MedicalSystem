@@ -27,5 +27,15 @@ public class IndexController {
         return "redirect:index";
     }
 
+    @GetMapping("team")
+    public String getTeam(Model model) {
+        return "team";
+    }
+
+    @GetMapping("services")
+    public String get(Model model) {
+        return "services";
+    }
+
     // TODO: Добавить еженедельную рассылку почты
 }

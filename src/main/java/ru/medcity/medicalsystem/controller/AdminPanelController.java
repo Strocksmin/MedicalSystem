@@ -65,4 +65,10 @@ public class AdminPanelController {
         return "redirect:/adminpanel";
     }
 
+    @GetMapping("adminpanel/clients")
+    public String getClients(Model model) {
+        model.addAttribute("clients", clientService.getClients());
+        return "clients";
+    }
+
 }

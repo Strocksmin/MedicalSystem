@@ -34,9 +34,9 @@ let Dashboard = (() => {
     init: () => {
       $(".js-hamburger").on("click", sidebarChangeWidth);
 
-      $(".js-menu li").on("click", e => {
+      /*$(".js-menu li").on("click", e => {
         menuChangeActive(e.currentTarget);
-      });
+      }); */
 
       $('[data-toggle="tooltip"]').tooltip(global.tooltipOptions);
     } };
@@ -120,7 +120,7 @@ getPagination('#table-id');
 // SI SETTING
 $(function(){
 	// Just to append id number for each row  
-default_index();
+
 					
 });
 

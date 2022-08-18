@@ -16,7 +16,6 @@ public class Client {
             "clients_id_seq", allocationSize = 1)
     @GeneratedValue(generator = "clients_seq", strategy =
             GenerationType.SEQUENCE)
-    @Column(name = "id")
     private int id;
     @Column(name = "client_name")
     private String name;
