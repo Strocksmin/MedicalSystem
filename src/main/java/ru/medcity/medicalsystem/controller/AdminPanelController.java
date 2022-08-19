@@ -15,19 +15,18 @@ import ru.medcity.medicalsystem.service.ProposalService;
 public class AdminPanelController {
     @Autowired
     ProposalService proposalService;
-
     @Autowired
     ClientService clientService;
     @Autowired
     DoctorService doctorService;
 
-    @GetMapping("adminpanel")
+    @GetMapping("/adminpanel")
     public String adminpanel(Model model) {
         model.addAttribute("proposals", proposalService.getProposals());
         return "adminpanel";
     }
 
-    @GetMapping("adminpanel/edit/{id}")
+    @GetMapping("/adminpanel/edit/{id}")
     public String editProposal(Model model, @PathVariable int id) {
         model.addAttribute("proposal", proposalService.getProposal(id));
         model.addAttribute("doctors", doctorService.getDoctors());
@@ -48,13 +47,13 @@ public class AdminPanelController {
         return "redirect:/adminpanel";
     }
 
-    @GetMapping("adminpanel/delete/{id}")
+    @GetMapping("/adminpanel/delete/{id}")
     public String deleteProposal(Model model, @PathVariable int id) {
         proposalService.deleteProposal(id);
         return "redirect:/adminpanel";
     }
 
-    @GetMapping("adminpanel/accept/{id}")
+    @GetMapping("/adminpanel/accept/{id}")
     public String acceptProposal(Model model, @PathVariable int id) {
         Proposal proposal = proposalService.getProposal(id);
         clientService.addClient(new Client(proposal.getName(), proposal.getLastname(),
@@ -65,7 +64,7 @@ public class AdminPanelController {
         return "redirect:/adminpanel";
     }
 
-    @GetMapping("adminpanel/clients")
+    @GetMapping("/adminpanel/clients")
     public String getClients(Model model) {
         model.addAttribute("clients", clientService.getClients());
         return "clients";

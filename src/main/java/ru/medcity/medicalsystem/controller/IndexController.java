@@ -14,25 +14,25 @@ public class IndexController {
     @Autowired
     EmailServiceImpl emailService;
 
-    @GetMapping("index")
+    @GetMapping("/index")
     public String index(Model model) {
         model.addAttribute("messageData", new MessageData());
         return "index";
     }
 
-    @PostMapping("sendMessage")
+    @PostMapping("/sendMessage")
     public String sendMessage(final MessageData messageData, final Model model) {
         System.out.println("Текст = " + messageData.getText());
         emailService.sendSimpleEmail(messageData);
         return "redirect:index";
     }
 
-    @GetMapping("team")
+    @GetMapping("/team")
     public String getTeam(Model model) {
         return "team";
     }
 
-    @GetMapping("services")
+    @GetMapping("/services")
     public String get(Model model) {
         return "services";
     }
