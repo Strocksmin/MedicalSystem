@@ -39,12 +39,17 @@ public class UserService implements UserDetailsService {
         session.close();
     }
 
+    public User getUserByUsername(String username) {
+        return session.createQuery("select u from User u where u.name ='" + username.toLowerCase() + "'", User.class).getSingleResult();
+    }
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user =  session.createQuery("select u from User u where u.name ='" + username.toLowerCase() + "'", User.class).getSingleResult();
+        User user = session.createQuery("select u from User u where u.name ='" + username.toLowerCase() + "'", User.class).getSingleResult();
         if (user == null) throw new UsernameNotFoundException("User not found");
 
-        return new org.springframework.security.core.userdetails.User(user.getName(), user.getPassword(), mapRolesToAuthorities(user.getRoles()));
+        return new org.springframework.security.core.userdetails.User(user.getName(), user.getPassword(),
+                mapRolesToAuthorities(user.getRoles()));
     }
 
     private Collection<GrantedAuthority> mapRolesToAuthorities(Collection<Role> roles) {

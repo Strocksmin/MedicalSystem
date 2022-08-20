@@ -9,8 +9,10 @@ import java.io.Serializable;
 @Getter
 @Setter
 @NoArgsConstructor
-public class MessageData implements Serializable {
+public class UserData implements Serializable {
     private String name;
+    private String lastname;
+    private String email;
     private String phone;
-    private String text;
+    private String password;
 }

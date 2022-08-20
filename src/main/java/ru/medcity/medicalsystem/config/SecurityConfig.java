@@ -35,7 +35,7 @@ public class SecurityConfig /*extends WebSecurityConfigurerAdapter */{
                 .antMatchers("/authenticated/**").authenticated()
                 .antMatchers("only_for_admin/**").hasRole("ADMIN")
                 .and()
-                .formLogin()
+                .formLogin().loginPage("/login").loginProcessingUrl("/login").permitAll()
                 .and()
                 .logout().logoutSuccessUrl("/");
         return http.build();
