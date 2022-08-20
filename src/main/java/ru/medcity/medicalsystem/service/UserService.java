@@ -17,6 +17,7 @@ import ru.medcity.medicalsystem.model.User;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
+import javax.persistence.NoResultException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -29,7 +30,6 @@ public class UserService implements UserDetailsService {
     private Session session;
 
     BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-
 
     public UserService(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
@@ -66,14 +66,20 @@ public class UserService implements UserDetailsService {
             throw new UserAlreadyExistsException("User already exists");
         }
         user.setPassword(passwordEncoder.encode(user.getPassword()));
+        ArrayList<Role> roles = new ArrayList<>();
+        roles.add(session.createQuery("select r from Role r where r.name ='" + "USER" + "'", Role.class).getSingleResult());
+        user.setRoles(roles);
         session.beginTransaction();
         session.saveOrUpdate(user);
         session.getTransaction().commit();
     }
 
     private boolean checkUserExist(String email) {
-        if (session.createQuery("select u from User u where u.email ='" + email + "'", User.class).getSingleResult() != null)
+        try {
+            session.createQuery("select u from User u where u.email ='" + email + "'", User.class).getSingleResult();
             return true;
-        return false;
+        } catch (NoResultException noResultException) {
+            return false;
+        }
     }
 }

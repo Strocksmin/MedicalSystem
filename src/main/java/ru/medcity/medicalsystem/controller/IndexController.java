@@ -16,6 +16,11 @@ public class IndexController {
     @Autowired
     EmailServiceImpl emailService;
 
+    @GetMapping("")
+    public String getHome() {
+        return "redirect:/index";
+    }
+
     @GetMapping("index")
     public String index(Model model) {
         model.addAttribute(new MessageData());

@@ -39,7 +39,7 @@ public class SecurityConfig /*extends WebSecurityConfigurerAdapter */{
                 .antMatchers("/authenticated/**").authenticated()
                 .antMatchers("only_for_admin/**").hasRole("ADMIN")
                 .and()
-                .formLogin().loginPage("/login").defaultSuccessUrl("/", true)
+                .formLogin().loginPage("/login").defaultSuccessUrl("/index", true)
                 .and()
                 .logout().logoutSuccessUrl("/");
         return http.build();
