@@ -31,8 +31,8 @@ public class Client {
     private String datetime;
 
     @JsonIgnore
-    @ManyToOne(optional=false)
-    @JoinColumn(name = "doctor_id", insertable=false, updatable=false)
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "doctor_id", insertable = false, updatable = false)
     private Doctor doctor;
 
     public Client(String name, String lastname, String email, String number, int doctorID, String datetime) {

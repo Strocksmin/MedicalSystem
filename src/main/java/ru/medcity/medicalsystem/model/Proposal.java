@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
 import java.io.Serializable;
 
 @Data
@@ -18,12 +20,18 @@ public class Proposal implements Serializable {
             GenerationType.SEQUENCE)
     @Column(name = "id")
     private int id;
+    @NotEmpty(message = "Имя не может быть пустым.")
     @Column(name = "proposal_name")
     private String name;
+    @NotEmpty(message = "Фамилия не может быть пустой.")
     @Column(name = "proposal_lastname")
     private String lastname;
+    @NotEmpty(message = "Электронная почта не может быть пустой.")
     @Column(name = "proposal_email")
     private String email;
+    @Pattern(regexp = "\\+[0-9]{11}",
+            message = "Формат поля телефона: +79038593535")
+    @NotEmpty(message = "Телефон не может быть пустым.")
     @Column(name = "proposal_number")
     private String number;
     @Column(name = "proposal_specialization")

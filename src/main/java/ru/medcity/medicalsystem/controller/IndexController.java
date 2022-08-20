@@ -16,7 +16,7 @@ public class IndexController {
     @Autowired
     EmailServiceImpl emailService;
 
-    @GetMapping("")
+    @GetMapping("/")
     public String getHome() {
         return "redirect:/index";
     }
@@ -28,7 +28,7 @@ public class IndexController {
     }
 
     @PostMapping("sendMessage")
-    public String postForm(MessageData messageData,  Model model) {
+    public String postForm(MessageData messageData, Model model) {
         System.out.println("Текст = " + messageData.getText());
         emailService.sendSimpleEmail(messageData);
         return "redirect:index";

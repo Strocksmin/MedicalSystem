@@ -44,6 +44,9 @@
                         <div class="card-body p-sm-5">
                             <h2 class="text-center mb-4">Запись к врачу</h2>
                             <form th:action="@{appointment}" th:object="${proposal}" method="post">
+                                <div class="alert alert-danger" th:if="${#fields.hasErrors('*')}">
+                                    <p th:each="err : ${#fields.errors('*')}" th:text="${err}"></p>
+                                </div>
                                 <div class="mb-3">
                                     <input class="form-control" type="text" th:field="*{name}" id="name-2" name="name" placeholder="Имя">
                                     <input class="form-control" type="text" th:field="*{lastname}" id="lastname" name="lastname" placeholder="Фамилия">

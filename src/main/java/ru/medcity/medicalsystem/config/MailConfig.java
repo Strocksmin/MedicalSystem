@@ -31,7 +31,7 @@ public class MailConfig {
     }
 
     @Bean
-    public EmailService getEmailService(){
+    public EmailService getEmailService() {
         return new EmailServiceImpl();
     }
 }

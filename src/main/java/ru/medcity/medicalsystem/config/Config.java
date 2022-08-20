@@ -17,7 +17,7 @@ import java.util.Properties;
 @Configuration
 public class Config {
     @Bean
-    public HikariDataSource dataSource(){
+    public HikariDataSource dataSource() {
         HikariConfig config = new HikariConfig();
         config.setJdbcUrl("jdbc:postgresql://localhost:5432/medical");
         config.setUsername("postgres");
@@ -27,7 +27,7 @@ public class Config {
     }
 
     @Bean
-    public LocalSessionFactoryBean sessionFactory(DataSource dataSource){
+    public LocalSessionFactoryBean sessionFactory(DataSource dataSource) {
         LocalSessionFactoryBean factoryBean = new LocalSessionFactoryBean();
         factoryBean.setDataSource(dataSource);
         factoryBean.setPackagesToScan("ru.medcity.medicalsystem");
@@ -38,7 +38,7 @@ public class Config {
     }
 
     @Bean
-    public PlatformTransactionManager platformTransactionManager(LocalSessionFactoryBean factoryBean){
+    public PlatformTransactionManager platformTransactionManager(LocalSessionFactoryBean factoryBean) {
         HibernateTransactionManager transactionManager = new HibernateTransactionManager();
         transactionManager.setSessionFactory(factoryBean.getObject());
         return transactionManager;
