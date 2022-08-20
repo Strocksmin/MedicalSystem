@@ -2,6 +2,7 @@ package ru.medcity.medicalsystem.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -9,6 +10,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import ru.medcity.medicalsystem.service.UserService;
 
 @EnableWebSecurity
@@ -31,11 +34,12 @@ public class SecurityConfig /*extends WebSecurityConfigurerAdapter */{
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.authorizeHttpRequests()
+        http.csrf().disable().cors().disable().authorizeHttpRequests()
+                .antMatchers("/", "/appointment", "/index", "/team", "/services", "/login").permitAll()
                 .antMatchers("/authenticated/**").authenticated()
                 .antMatchers("only_for_admin/**").hasRole("ADMIN")
                 .and()
-                .formLogin().loginPage("/login").loginProcessingUrl("/login").permitAll()
+                .formLogin().loginPage("/login").defaultSuccessUrl("/", true)
                 .and()
                 .logout().logoutSuccessUrl("/");
         return http.build();
@@ -52,5 +56,14 @@ public class SecurityConfig /*extends WebSecurityConfigurerAdapter */{
         daoAuthenticationProvider.setPasswordEncoder(passwordEncoder());
         daoAuthenticationProvider.setUserDetailsService(userService);
         return daoAuthenticationProvider;
+    }
+
+    @Configuration
+    public class MVConfig implements WebMvcConfigurer {
+
+        @Override
+        public void addViewControllers(ViewControllerRegistry registry) {
+            registry.addViewController("/login").setViewName("login");
+        }
     }
 }

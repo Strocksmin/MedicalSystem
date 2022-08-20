@@ -21,4 +21,9 @@ public class ProposalController {
     public @ResponseBody List<Doctor> getdoctors(Model model) {
         return doctorService.getDoctors();
     }
+
+    @GetMapping("/authenticated")
+    public String auth(Model model) {
+        return "index";
+    }
 }
