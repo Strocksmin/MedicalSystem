@@ -36,8 +36,10 @@ public class SecurityConfig /*extends WebSecurityConfigurerAdapter */{
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.csrf().disable().cors().disable().authorizeHttpRequests()
                 .antMatchers("/", "/appointment", "/index", "/team", "/services", "/login").permitAll()
-                .antMatchers("/authenticated/**").authenticated()
-                .antMatchers("only_for_admin/**").hasRole("ADMIN")
+                .antMatchers("/profile").authenticated()
+                .antMatchers("/adminpanel", "/adminpanel/**").hasAuthority("ADMIN")
+                .antMatchers("/doctorprofile").hasAuthority("DOCTOR")
+                .antMatchers("/clientprofile").hasAuthority("CLIENT")
                 .and()
                 .formLogin().loginPage("/login").defaultSuccessUrl("/index", true)
                 .and()

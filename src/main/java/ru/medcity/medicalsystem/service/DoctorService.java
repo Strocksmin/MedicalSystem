@@ -3,6 +3,7 @@ package ru.medcity.medicalsystem.service;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Service;
+import ru.medcity.medicalsystem.model.Client;
 import ru.medcity.medicalsystem.model.Doctor;
 import ru.medcity.medicalsystem.model.Proposal;
 
@@ -43,6 +44,11 @@ public class DoctorService {
 
     public Doctor getDoctorForProposal(String specialization) {
         return session.createQuery("select d from Doctor d where d.specialization ='" + specialization + "'", Doctor.class)
+                .getSingleResult();
+    }
+
+    public Doctor getDoctorByDoctorUser(String email) {
+        return session.createQuery("select d from Doctor d where d.email ='" + email + "'", Doctor.class)
                 .getSingleResult();
     }
 }

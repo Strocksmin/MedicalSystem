@@ -41,4 +41,13 @@ public class User implements Serializable {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Collection<Role> roles;
+
+    public String rolesToString() {
+        StringBuffer stringBuffer = new StringBuffer();
+        stringBuffer.append("Роли: ");
+        for (Role role: roles) {
+            stringBuffer.append(role.getName() + ", ");
+        }
+        return stringBuffer.toString();
+    }
 }

@@ -5,11 +5,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.medcity.medicalsystem.DTO.MessageData;
+import ru.medcity.medicalsystem.DTO.RoleData;
 import ru.medcity.medicalsystem.model.Client;
 import ru.medcity.medicalsystem.model.Proposal;
-import ru.medcity.medicalsystem.service.ClientService;
-import ru.medcity.medicalsystem.service.DoctorService;
-import ru.medcity.medicalsystem.service.ProposalService;
+import ru.medcity.medicalsystem.model.Role;
+import ru.medcity.medicalsystem.model.User;
+import ru.medcity.medicalsystem.service.*;
+
+import java.util.Collection;
+import java.util.Set;
 
 @Controller
 public class AdminPanelController {
@@ -19,6 +23,11 @@ public class AdminPanelController {
     ClientService clientService;
     @Autowired
     DoctorService doctorService;
+
+    @Autowired
+    RoleService roleService;
+    @Autowired
+    UserService userService;
 
     @GetMapping("/adminpanel")
     public String adminpanel(Model model) {
@@ -70,4 +79,33 @@ public class AdminPanelController {
         return "clients";
     }
 
+    @GetMapping("/adminpanel/users")
+    public String getUsers(Model model) {
+        model.addAttribute("users", userService.getUsers());
+        return "users";
+    }
+
+    @GetMapping("/adminpanel/edituser/{id}")
+    public String getEditUser(@PathVariable int id, Model model) {
+        User user = userService.getUserById(id);
+        model.addAttribute("user", user);
+        model.addAttribute("roles", roleService.getRoles());
+        model.addAttribute("rol", new RoleData());
+        return "editUser";
+    }
+
+    @PostMapping("/adminpanel/postedituser/{id}")
+    public String postEditUser(Model model, @PathVariable int id,  @ModelAttribute("user") User userdata, @ModelAttribute("rol") RoleData rol) {
+        User newUser = userService.getUserById(id);
+        Collection<Role> roles = newUser.getRoles();
+        if (!roles.contains(userService.getRole(rol.getRoleN())))
+            roles.add(userService.getRole(rol.getRoleN()));
+        newUser.setId(id);
+        newUser.setName(userdata.getName());
+        newUser.setName(userdata.getLastname());
+        newUser.setName(userdata.getName());
+        newUser.setRoles(roles);
+        userService.upgradeUser(newUser);
+        return "redirect:/adminpanel";
+    }
 }

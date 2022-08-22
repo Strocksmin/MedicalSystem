@@ -12,15 +12,14 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import ru.medcity.medicalsystem.DTO.UserData;
 import ru.medcity.medicalsystem.exception.UserAlreadyExistsException;
+import ru.medcity.medicalsystem.model.Doctor;
 import ru.medcity.medicalsystem.model.Role;
 import ru.medcity.medicalsystem.model.User;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.persistence.NoResultException;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -49,6 +48,24 @@ public class UserService implements UserDetailsService {
         return session.createQuery("select u from User u where u.email ='" + email + "'", User.class).getSingleResult();
     }
 
+    public List<User> getUsers() {
+        return session.createQuery("select u from User u", User.class).getResultList();
+    }
+
+    public void upgradeUser(User user) {
+        session.beginTransaction();
+        session.update(user);
+        session.getTransaction().commit();
+    }
+
+    public Role getRole(String role) {
+        return session.createQuery("select r from Role r where r.name ='" + role + "'", Role.class).getSingleResult();
+    }
+
+    public User getUserById(int id) {
+        return session.createQuery("select u from User u where u.id ='" + id + "'", User.class).getSingleResult();
+    }
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = session.createQuery("select u from User u where u.email ='" + username + "'", User.class).getSingleResult();
@@ -66,13 +83,15 @@ public class UserService implements UserDetailsService {
             throw new UserAlreadyExistsException("User already exists");
         }
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        ArrayList<Role> roles = new ArrayList<>();
-        roles.add(session.createQuery("select r from Role r where r.name ='" + "USER" + "'", Role.class).getSingleResult());
+        Set<Role> roles = new HashSet<>();
+        roles.add(session.createQuery("select r from Role r where r.name ='" + "CLIENT" + "'", Role.class).getSingleResult());
         user.setRoles(roles);
         session.beginTransaction();
         session.saveOrUpdate(user);
         session.getTransaction().commit();
     }
+
+
 
     private boolean checkUserExist(String email) {
         try {

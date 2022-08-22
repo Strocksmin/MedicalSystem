@@ -37,6 +37,10 @@ public class ClientService {
     }
 
     public List<Client> getClients() {
-        return session.createQuery("select c from Client c", Client.class).getResultList();
+        return session.createQuery("select c from Client c order by c.datetime desc", Client.class).getResultList();
+    }
+
+    public List<Client> getClientsByEmail(String email) {
+        return session.createQuery("select c from Client c where c.email ='" + email + "' order by c.datetime desc", Client.class).getResultList();
     }
 }
