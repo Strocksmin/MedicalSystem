@@ -3,13 +3,10 @@ package ru.medcity.medicalsystem.service;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Service;
-import ru.medcity.medicalsystem.model.Client;
 import ru.medcity.medicalsystem.model.Doctor;
-import ru.medcity.medicalsystem.model.Proposal;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
-import javax.print.Doc;
 import java.util.List;
 
 

@@ -3,7 +3,6 @@ package ru.medcity.medicalsystem.service;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Service;
-import ru.medcity.medicalsystem.model.Client;
 import ru.medcity.medicalsystem.model.Role;
 
 import javax.annotation.PostConstruct;

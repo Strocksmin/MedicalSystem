@@ -5,7 +5,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import ru.medcity.medicalsystem.DTO.MessageData;
 import ru.medcity.medicalsystem.model.Doctor;
 import ru.medcity.medicalsystem.service.DoctorService;
 

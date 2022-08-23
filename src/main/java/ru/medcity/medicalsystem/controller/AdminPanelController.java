@@ -3,8 +3,10 @@ package ru.medcity.medicalsystem.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-import ru.medcity.medicalsystem.DTO.MessageData;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import ru.medcity.medicalsystem.DTO.RoleData;
 import ru.medcity.medicalsystem.model.Client;
 import ru.medcity.medicalsystem.model.Proposal;
@@ -13,7 +15,6 @@ import ru.medcity.medicalsystem.model.User;
 import ru.medcity.medicalsystem.service.*;
 
 import java.util.Collection;
-import java.util.Set;
 
 @Controller
 public class AdminPanelController {

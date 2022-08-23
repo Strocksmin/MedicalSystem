@@ -2,14 +2,11 @@ package ru.medcity.medicalsystem.service;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.springframework.jdbc.object.SqlQuery;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import ru.medcity.medicalsystem.model.Proposal;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
-import javax.transaction.Transactional;
 import java.util.List;
 
 
