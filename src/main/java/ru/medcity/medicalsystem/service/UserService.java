@@ -61,7 +61,6 @@ public class UserService implements UserDetailsService {
     public Role getRole(String role) {
         return session.createQuery("select r from Role r where r.name ='" + role + "'", Role.class).getSingleResult();
     }
-
     public User getUserById(int id) {
         return session.createQuery("select u from User u where u.id ='" + id + "'", User.class).getSingleResult();
     }
